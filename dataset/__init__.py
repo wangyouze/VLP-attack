@@ -5,7 +5,6 @@ from torchvision import transforms
 from PIL import Image
 
 from dataset.caption_dataset import re_train_dataset, re_eval_dataset, pretrain_dataset, pair_dataset
-from dataset.nlvr_dataset import nlvr_dataset
 from dataset.ve_dataset import ve_dataset
 from dataset.vqa_dataset import vqa_dataset
 from dataset.grounding_dataset import grounding_dataset
@@ -63,12 +62,7 @@ def create_dataset(dataset, config):
         train_dataset = vqa_dataset(config['train_file'], train_transform, config['vqa_root'], config['vg_root'], split='train') 
         vqa_test_dataset = vqa_dataset(config['test_file'], test_transform, config['vqa_root'], config['vg_root'], split='test', answer_list=config['answer_list'])       
         return train_dataset, vqa_test_dataset
-
-    elif dataset=='nlvr':   
-        train_dataset = nlvr_dataset(config['train_file'], train_transform, config['image_root'])  
-        val_dataset = nlvr_dataset(config['val_file'], test_transform, config['image_root'])  
-        test_dataset = nlvr_dataset(config['test_file'], test_transform, config['image_root'])                
-        return train_dataset, val_dataset, test_dataset        
+      
                
     elif dataset=='ve':   
         train_dataset = ve_dataset(config['train_file'], train_transform, config['image_root'])  
